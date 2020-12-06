@@ -1,0 +1,73 @@
+// 共通SCSS
+$colors: (
+  'gray1': $gray1,
+  // dark >>>>>
+  'gray2': $gray2,
+  'gray3': $gray3,
+  'gray4': $gray4,
+  // <<<<< light
+  'bk': $bk,
+  // black
+  'bk2': $bk2,
+  'wh': $wh,
+  // white
+  'rd': $rd,
+  // red
+  'gr': $gr,
+  // green for notice color
+  'bl': $bl,
+  // blue
+  'blg': $blg,
+  // blue green for client
+  'ef': $ef,
+  // green for staff
+  'or': $or,
+  //link bg
+  'or2': $or2,
+  // btn color
+  'btn-twitter': $twitter-blue,
+  'btn-google': $google-gray,
+  'primary': $primary,
+);
+// font-color
+@each $color-name, $color in $colors {
+  .my-#{$color-name} {
+    color: $color;
+  }
+}
+
+// background-color
+@each $color-name, $color in $colors {
+  .my-bg-#{$color-name} {
+    background-color: $color;
+  }
+}
+
+$font-sizes: (
+  'font4': $px4,
+  'font9': $px9,
+  'font10': $px10,
+  'font11': $px11,
+  'font12': $px12,
+  'font13': $px13,
+  'font14': $px14,
+  'font15': $px15,
+  'font16': $px16,
+  'font18': $px18,
+  'font20': $px20,
+  'font22': $px22,
+  'font24': $px24,
+  'font28': $px28,
+  'font32': $px32,
+  'font36': $px36,
+);
+
+@each $font-name, $font-size in $font-sizes {
+  .my-#{$font-name} {
+    font-size: $font-size;
+  }
+}
+
+.w-100 {
+  width: 100%;
+}

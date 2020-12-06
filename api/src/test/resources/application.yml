@@ -1,0 +1,29 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  messages:
+    cache-duration: -1
+  datasource:
+    url: "jdbc:mysql://localhost:3306/skill_map_db_test"
+    username: root
+    password: password
+  jpa:
+    hidernate:
+      ddl-auto: "update"
+  flyway:
+    enable: true
+    url: "jdbc:mysql://localhost:3306/skill_map_db_test"
+    user: root
+    password: password
+    baseline-on-migrate: true
+    placeholder-replcement: false
+    locations: "classpath:db/migration"
+  logging:
+    level:
+      org.springframework: INFO
+      org.springframework.jdbc: INFO
+      org.thymeleaf: INFO
+      com.proatmedia: DEBUG
+  mail:
+    host: "localhost"
+    port: 3025

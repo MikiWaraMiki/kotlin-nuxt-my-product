@@ -1,0 +1,60 @@
+// Ref: https://github.com/nuxt-community/vuetify-module#customvariables
+//
+// The variables you want to modify
+// $font-size-root: 20px;
+
+// color =================================
+$bk: #3b3a40; // dark >>>>>
+$bk2: #565e65; // <<<< light
+$wh: #fff;
+$rd: #f15e5e; // red for notice color
+$gr: #66db57; // green for notice color
+$bl: #3e27b2; // blue for senmonka
+$blg: #2cc8b5; // bluegreen for hattyusya
+$ef: #1bb304; // green for staff
+
+$or: #fef9ec; //link bg
+$or2: #f6b80c; // btn color
+
+$gray1: #98a2ab; // dark >>>>>
+$gray2: #c6cbd0;
+$gray3: #ebecef;
+$gray4: #f7f8fa; // <<<<< light
+
+$twitter-blue: #1da1f2;
+$google-gray: #c4c4c4;
+
+$primary: #1976d2;
+
+// font-size  =================================
+$px4: 0.25rem;
+$px9: 0.5625rem;
+$px10: 0.625rem;
+$px11: 0.6875rem;
+$px12: 0.75rem;
+$px13: 0.8125rem;
+$px14: 0.875rem;
+$px15: 0.9375rem;
+$px16: 1rem;
+$px18: 1.125rem;
+$px20: 1.25rem;
+$px22: 1.375rem;
+$px24: 1.5rem;
+$px28: 1.75rem;
+$px32: 2rem;
+$px36: 2.25rem;
+
+// Smart Devise Size =========
+$sp-width: 480px;
+@mixin sp {
+  @media (max-width: ($sp-width)) {
+    @content;
+  }
+}
+// Table Size        ==========
+$tablet-width: 834px;
+@mixin tablet-sp {
+  @media screen and (min-width: ($sp-width)) and (max-width: ($tablet-width)) {
+    @content;
+  }
+}

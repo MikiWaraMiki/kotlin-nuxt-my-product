@@ -1,0 +1,40 @@
+spring:
+  profiles:
+    default: local
+    active: local
+  main:
+    allow-bean-definition-overriding: true
+  jpa:
+    hidernate:
+      ddl-auto: "update"
+security:
+  allowed-origins:
+    - https://tokora-ga-dokkoi.com
+    - https://stg.tokora-ga-dokkoi.com
+    - http://localhost:3000
+  allowed-methods:
+    - GET
+    - POST
+    - PUT
+    - PATCH
+    - DELETE
+    - OPTIONS
+  allowed-headers:
+    - Authorization
+    - Origin
+    - Content-Type
+    - Accept
+    - Accept-Encoding
+    - Accept-Language
+    - Access-Control-Allow-Origin
+    - Access-Control-Allow-Headers
+    - Access-Control-Request-Method
+    - X-Requested-With
+    - X-Auth-Token
+    - X-Xsrf-Token
+    - Cache-Control
+    - Id-Token
+  allowed-public-apis:
+    - /api/v1/users/registration
+    - /api/v1/public
+    - /api/v1/users

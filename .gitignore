@@ -1,0 +1,3 @@
+*DS_STORE
+# mysql
+docker/mysql/**/*
