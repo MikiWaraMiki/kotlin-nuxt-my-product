@@ -55,6 +55,7 @@ import ATextField from '@/components/atoms/ATextField.vue'
 import ASnackbar from '~/components/atoms/ASnackbar.vue'
 // Store
 import { temporaryRegistrationStore, userAuthStore } from '~/store'
+import { IUserState } from '~/store/users/UserAuth'
 
 export type VForm = Vue & { validate: () => boolean }
 export default Vue.extend({
@@ -84,7 +85,6 @@ export default Vue.extend({
         this.$auth.onAuthStateChanged((user) => resolve(user || null))
       }
     )
-    console.log(user)
     if (user) {
       userAuthStore.setUserInfo(user)
       this.$router.push('/users/new')

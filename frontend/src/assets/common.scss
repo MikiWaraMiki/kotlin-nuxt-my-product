@@ -28,6 +28,8 @@ $colors: (
   'btn-twitter': $twitter-blue,
   'btn-google': $google-gray,
   'primary': $primary,
+  'btn-header': $header-btn-gray,
+  'btn-icon': $icon-color,
 );
 // font-color
 @each $color-name, $color in $colors {

@@ -39,7 +39,7 @@ import { userAuthStore } from '~/store'
 import {
   NewUserCreateParams,
   PostRepository,
-} from '~/repositories/users/postRepository'
+} from '~/repositories/users/registrations/postRepository'
 
 export type VForm = Vue & { validate: () => boolean }
 export default Vue.extend({
@@ -81,7 +81,6 @@ export default Vue.extend({
           this.message = '入力内容に不備があります'
           return
         }
-        await userAuthStore.getIdToken()
         const params: NewUserCreateParams = {
           uuid: userAuthStore.uid || '',
           email: this.user.email,

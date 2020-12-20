@@ -17,7 +17,9 @@ export function initializeAxios(axiosInstance: NuxtAxiosInstance) {
     return Promise.resolve(response)
   })
   $axios.onError((error: AxiosError) => {
-    return Promise.reject(error.response)
+    const errorCode = error.response?.status
+
+    console.log(errorCode)
   })
 }
 

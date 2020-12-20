@@ -1,5 +1,8 @@
+import { IncomingMessage } from 'http'
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators'
 import firebase from 'firebase'
+import Cookies from 'universal-cookie'
+import jwtDecode from 'jwt-decode'
 import { $firebase } from '~/utils/firebase'
 
 const AuthProviders = {
@@ -15,6 +18,7 @@ export interface IUserState {
   idToken: string | null
   loginType: AuthProviderType | null
 }
+
 @Module({
   stateFactory: true,
   namespaced: true,
@@ -69,7 +73,6 @@ export default class UserAuth extends VuexModule implements IUserState {
 
   @Action({ rawError: true })
   async signIn() {
-    console.log('called')
     if (this.loginType === null) {
       throw new Error('ログインタイプが指定されていない')
     }
@@ -77,7 +80,7 @@ export default class UserAuth extends VuexModule implements IUserState {
   }
 
   @Action({ rawError: true })
-  setUserInfo(user: firebase.User) {
+  async setUserInfo(user: firebase.User) {
     if (user.email) {
       this.setEmail(user.email)
     }
@@ -85,14 +88,34 @@ export default class UserAuth extends VuexModule implements IUserState {
       this.setDisplayName(user.displayName)
     }
     this.setUid(user.uid)
+    const token = await user.getIdToken(true)
+    this.setIdToken(token)
+    // cookieに認証情報をセット
+    const cookies = new Cookies()
+    cookies.set('access_token', token)
   }
 
   @Action({ rawError: true })
-  async getIdToken() {
-    const user = $firebase.auth().currentUser
-    if (user) {
-      const token = await user.getIdToken()
-      this.setIdToken(token)
-    }
+  setUserInfoFromCookie(decodedToken: any) {
+    this.setEmail(decodedToken.email)
+    this.setUid(decodedToken.user_id)
+    this.setDisplayName(decodedToken.name)
+  }
+
+  // for cookie
+  @Action({ rawError: true })
+  getCookie(req: IncomingMessage) {
+    if (process.server && process.static) return undefined
+    if (!req.headers.cookie) return undefined
+
+    const cookie = new Cookies(req.headers.cookie)
+    const token = cookie.get('access_token')
+
+    if (!token) return undefined
+
+    // tokenをセットしておく
+    this.setIdToken(token)
+    const decodedToken = jwtDecode(token)
+    return decodedToken
   }
 }

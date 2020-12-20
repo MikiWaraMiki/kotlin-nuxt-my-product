@@ -41,7 +41,8 @@ export default {
   // Router Config
   router: {
     middleware: [
-      'authenticated'
+      'authenticated',
+      'handlerLoginUser'
     ]
   },
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
@@ -67,6 +68,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
+    '@nuxtjs/pwa',
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)

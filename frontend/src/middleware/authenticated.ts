@@ -1,21 +1,13 @@
-import firebase from 'firebase'
 import { Middleware } from '@nuxt/types'
-import { $firebase } from '~/utils/firebase'
 import { userAuthStore } from '~/store'
 
-const firebaseAuthMiddleware: Middleware = async ({ route, redirect }) => {
-  const user: firebase.User | null = await new Promise(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    (resolve, reject) => {
-      $firebase.auth().onAuthStateChanged((user) => {
-        resolve(user || null)
-      })
-    }
-  )
-  if (user) {
-    userAuthStore.setUserInfo(user)
-  }
-  if (!user && route.name !== '/users/registration' && route.name !== '/') {
+/**
+ * 未ログインユーザに対する認証処理
+ * store上にuidが存在しなければ、登録画面にリダイレクト
+ */
+const nonNeedLoginPath: string[] = ['/users/registration', '/', '/login']
+const firebaseAuthMiddleware: Middleware = ({ route, redirect }) => {
+  if (!userAuthStore.uid && !nonNeedLoginPath.includes(route.path || '/')) {
     redirect('/users/registration')
   }
 }

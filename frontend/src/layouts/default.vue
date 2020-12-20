@@ -1,6 +1,11 @@
 <template>
   <v-app>
-    <un-login-header></un-login-header>
+    <template v-if="isLogin">
+      <login-header :user-display-name="userDisplayName" />
+    </template>
+    <template v-else>
+      <un-login-header></un-login-header>
+    </template>
     <v-main>
       <v-container>
         <nuxt />
@@ -15,14 +20,20 @@
 <script lang="ts">
 import Vue from 'vue'
 import UnLoginHeader from '~/layouts/UnLoginHeader.vue'
+import LoginHeader from '~/layouts/LoginHeader.vue'
+import { userAuthStore } from '~/store'
 export default Vue.extend({
   components: {
-    UnLoginHeader
+    UnLoginHeader,
+    LoginHeader,
   },
-  data() {
-    return {
-
-    }
+  computed: {
+    isLogin(): boolean {
+      return userAuthStore.isLogin
+    },
+    userDisplayName(): string {
+      return userAuthStore.displayName || ''
+    },
   },
 })
 </script>

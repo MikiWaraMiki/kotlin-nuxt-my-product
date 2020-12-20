@@ -1,5 +1,5 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
-const basePath = '/api/v1/users'
+const basePath = '/api/v1/users/registrations'
 
 /**
  * リクエストパラメータ
